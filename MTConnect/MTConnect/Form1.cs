@@ -72,6 +72,12 @@ namespace MTConnect
                             Timestamp = di.Timestamp.ToString("yyyy-MM-dd HH:mm:ss"),
                             Value = di.CDATA
                         });
+
+                        PushToMonitorService ptms = PushToMonitorService.getInstance();
+                        if (ptms != null)
+                        {
+                            ptms.push(di.DataItemId + "_" + di.Name, di.Timestamp, di.CDATA);
+                        }
                     }
                 }
 
@@ -143,6 +149,12 @@ namespace MTConnect
                     Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
                     Value = errorDocument.Errors[i].CDATA
                 };
+
+                PushToMonitorService ptms = PushToMonitorService.getInstance();
+                if (ptms != null)
+                {
+                    ptms.push(errorDocument.Errors[i].ErrorCode.ToString(), DateTime.Now, errorDocument.Errors[i].CDATA);
+                }
             }
             putToLV(pocos);
         }
