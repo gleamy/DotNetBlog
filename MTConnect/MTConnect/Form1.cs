@@ -213,7 +213,12 @@ namespace MTConnect
             }
             public int Compare(object x, object y)
             {
-                int tempInt = String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+                var lx = x as ListViewItem;
+                var ly = y as ListViewItem;
+                var tx = lx.SubItems.Count > col ? lx.SubItems[col].Text : string.Empty;
+                var ty = ly.SubItems.Count > col ? ly.SubItems[col].Text : string.Empty;
+
+                int tempInt = String.Compare(tx, ty);
                 if (descK) return -tempInt;
                 else return tempInt;
             }
