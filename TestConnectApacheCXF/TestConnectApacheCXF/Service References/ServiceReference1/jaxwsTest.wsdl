@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://jaxws.web.mdc.longo/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="jaxwsTest" targetNamespace="http://jaxws.web.mdc.longo/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://jaxws.web.mdc.longo/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="HelloOne" type="tns:HelloOne" />
+      <xs:element name="HelloOneResponse" type="tns:HelloOneResponse" />
+      <xs:element name="HelloThree" type="tns:HelloThree" />
+      <xs:element name="HelloThreeResponse" type="tns:HelloThreeResponse" />
+      <xs:element name="HelloTwo" type="tns:HelloTwo" />
+      <xs:element name="HelloTwoResponse" type="tns:HelloTwoResponse" />
+      <xs:complexType name="HelloThree">
+        <xs:sequence>
+          <xs:element name="a" type="xs:int" />
+          <xs:element name="b" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="HelloThreeResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:hashMap" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="hashMap">
+        <xs:complexContent mixed="false">
+          <xs:extension base="tns:abstractMap">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="abstractMap" abstract="true">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="HelloTwo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="HelloTwoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="return" type="tns:hashMap" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="HelloOne">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="HelloOneResponse">
+        <xs:sequence>
+          <xs:element name="_return">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="entry">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element minOccurs="0" name="key" type="xs:anyType" />
+                      <xs:element minOccurs="0" name="value" type="xs:anyType" />
+                    </xs:sequence>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloOneResponse">
+    <wsdl:part name="parameters" element="tns:HelloOneResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloThreeResponse">
+    <wsdl:part name="parameters" element="tns:HelloThreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloTwoResponse">
+    <wsdl:part name="parameters" element="tns:HelloTwoResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloOne">
+    <wsdl:part name="parameters" element="tns:HelloOne" />
+  </wsdl:message>
+  <wsdl:message name="HelloTwo">
+    <wsdl:part name="parameters" element="tns:HelloTwo" />
+  </wsdl:message>
+  <wsdl:message name="HelloThree">
+    <wsdl:part name="parameters" element="tns:HelloThree" />
+  </wsdl:message>
+  <wsdl:portType name="Test">
+    <wsdl:operation name="HelloThree">
+      <wsdl:input name="HelloThree" message="tns:HelloThree" />
+      <wsdl:output name="HelloThreeResponse" message="tns:HelloThreeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloTwo">
+      <wsdl:input name="HelloTwo" message="tns:HelloTwo" />
+      <wsdl:output name="HelloTwoResponse" message="tns:HelloTwoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloOne">
+      <wsdl:input name="HelloOne" message="tns:HelloOne" />
+      <wsdl:output name="HelloOneResponse" message="tns:HelloOneResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="jaxwsTestSoapBinding" type="tns:Test">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloThree">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="HelloThree">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="HelloThreeResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloOne">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="HelloOne">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="HelloOneResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloTwo">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="HelloTwo">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="HelloTwoResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="jaxwsTest">
+    <wsdl:port name="TestImplPort" binding="tns:jaxwsTestSoapBinding">
+      <soap:address location="http://localhost:8080/mdc-max-client/jaxws/test" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
