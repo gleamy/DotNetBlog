@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.caecc.casc/civet/ics/extractagent" name="FileExtractService" targetNamespace="http://www.caecc.casc/civet/ics/extractagent" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.caecc.casc/civet/ics/extractagent" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:simpleType name="SecurityLevel">
+        <xs:annotation>
+          <xs:documentation>密级</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="none">
+            <xs:annotation>
+              <xs:documentation>公开</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="interior">
+            <xs:annotation>
+              <xs:documentation>内部</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="privacy">
+            <xs:annotation>
+              <xs:documentation>秘密</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="secret">
+            <xs:annotation>
+              <xs:documentation>机密</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="topsecret">
+            <xs:annotation>
+              <xs:documentation>绝密</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="ArrayOfstring" type="tns:ArrayOfstring" />
+      <xs:complexType name="ArrayOfstring">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="createGTask">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="folder" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="gFilename" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="pFilename" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="validate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="dataID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="destinationID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="clientID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="securityLevel" nillable="true" type="tns:SecurityLevel" />
+            <xs:element minOccurs="0" maxOccurs="1" name="signature" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createGTaskResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="createGTaskResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createFTask">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="folder" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="filenames" nillable="true" type="tns:ArrayOfstring" />
+            <xs:element minOccurs="0" maxOccurs="1" name="validate" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="destinationID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createFTaskResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="createFTaskResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="returnGTransResult">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="dataID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="result" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="destinationID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="clientID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="signature" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="returnGTransResultResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="returnGTransResultResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="FileExtractService_createGTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:createGTask" />
+  </wsdl:message>
+  <wsdl:message name="FileExtractService_createGTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:createGTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="FileExtractService_createFTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:createFTask" />
+  </wsdl:message>
+  <wsdl:message name="FileExtractService_createFTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:createFTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="FileExtractService_returnGTransResult_InputMessage">
+    <wsdl:part name="parameters" element="tns:returnGTransResult" />
+  </wsdl:message>
+  <wsdl:message name="FileExtractService_returnGTransResult_OutputMessage">
+    <wsdl:part name="parameters" element="tns:returnGTransResultResponse" />
+  </wsdl:message>
+  <wsdl:portType name="FileExtractService">
+    <wsdl:operation name="createGTask">
+      <wsdl:input name="FileExtractService_createGTask_InputMessageRequest" message="tns:FileExtractService_createGTask_InputMessage" />
+      <wsdl:output name="FileExtractService_createGTask_OutputMessageResponse" message="tns:FileExtractService_createGTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="createFTask">
+      <wsdl:input name="FileExtractService_createFTask_InputMessageRequest" message="tns:FileExtractService_createFTask_InputMessage" />
+      <wsdl:output name="FileExtractService_createFTask_OutputMessageResponse" message="tns:FileExtractService_createFTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="returnGTransResult">
+      <wsdl:input name="FileExtractService_returnGTransResult_InputMessageRequest" message="tns:FileExtractService_returnGTransResult_InputMessage" />
+      <wsdl:output name="FileExtractService_returnGTransResult_OutputMessageResponse" message="tns:FileExtractService_returnGTransResult_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_FileExtractService" type="tns:FileExtractService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="createGTask">
+      <soap:operation soapAction="ERIP_ExtractAgent_GK/FileExtractService/createGTask" style="document" />
+      <wsdl:input name="FileExtractService_createGTask_InputMessageRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="FileExtractService_createGTask_OutputMessageResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createFTask">
+      <soap:operation soapAction="ERIP_ExtractAgent_GK/FileExtractService/createFTask" style="document" />
+      <wsdl:input name="FileExtractService_createFTask_InputMessageRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="FileExtractService_createFTask_OutputMessageResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="returnGTransResult">
+      <soap:operation soapAction="ERIP_ExtractAgent_GK/FileExtractService/returnGTransResult" style="document" />
+      <wsdl:input name="FileExtractService_returnGTransResult_InputMessageRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="FileExtractService_returnGTransResult_OutputMessageResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FileExtractService">
+    <wsdl:port name="BasicHttpBinding_FileExtractService" binding="tns:BasicHttpBinding_FileExtractService">
+      <soap:address location="http://192.168.1.97:3355/FileExtractService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
