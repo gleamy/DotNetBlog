@@ -29,7 +29,9 @@ namespace MTConnect
             if (client != null)
                 return;
 
-            client = new MTConnectClient(txt_agent.Text, txt_driver.Text);
+            clrLv();
+
+            client = new MTConnectClient(txt_agent.Text.Trim(), txt_driver.Text.Trim() == string.Empty ? null : txt_driver.Text.Trim());
             client.Error += Client_Error;
             //client.ProbeReceived += Client_ProbeReceived;
 
@@ -39,8 +41,15 @@ namespace MTConnect
             // - 只会返回建立连接之后变化过的数据，不断的轮询返回,  因此必须与 'CurrentReceived' 配合起来使用。
             client.SampleReceived += Client_CurrentReceived;
 
+            //client.ProbeReceived += Client_ProbeReceived;
+
             //client.SampleReceived += StreamsSuccessful;
             client.Start();
+        }
+
+        private void Client_ProbeReceived(MTConnectDevices.Document document)
+        {
+            throw new NotImplementedException();
         }
 
         private void btn_stop_Click(object sender, EventArgs e)
@@ -59,7 +68,7 @@ namespace MTConnect
             foreach (MTConnectStreams.DeviceStream ds in document.DeviceStreams)
             {
                 // 通过对 Name 的调整（去掉 di,ev,sp, cd）进行验证后，发现 DataItems 中包含了 Event 、 Samples、Conditions
-                // ComponentStreams 比较杂，好像什么都包含，就不在这样验证了。
+                // ComponentStreams 比较杂，好像什么都包含，就不在这里验证了。
                 // 因此在这里只保留了对 DataItems 的读取。
                 string namePrefix = ds.Uuid + ":" + ds.Name + ":";
                 if (ds.DataItems != null && ds.DataItems.Count > 0)
@@ -68,10 +77,16 @@ namespace MTConnect
                     {
                         pocos.AddLast(new Poco()
                         {
-                            Name = namePrefix + di.DataItemId + ":" + di.Name + "-"+di.Category+ "-di",
-                            Timestamp = di.Timestamp.ToString("yyyy-MM-dd HH:mm:ss"),
+                            Device = namePrefix,
+                            Category = di.Category.ToString(),
+                            Sequence = di.Sequence.ToString(),
+                            SubType = di.SubType,
+                            DataItemId = di.DataItemId,
+                            Name = di.Name,
+                            Timestamp = di.Timestamp.ToString("yyyy-MM-dd HH:mm:ss:fff"),
                             Value = di.CDATA
                         });
+
 
                         PushToMonitorService ptms = PushToMonitorService.getInstance();
                         if (ptms != null)
@@ -174,27 +189,56 @@ namespace MTConnect
             foreach (var item in pocos)
             {
                 ListViewItem row = null;
-                if (lv_content.Items.ContainsKey(item.Name))
-                    row = lv_content.Items[item.Name];
+                if (lv_content.Items.ContainsKey(item.DataItemId))
+                    row = lv_content.Items[item.DataItemId];
                 else
                 {
-                    row = lv_content.Items.Add(item.Name, (lv_content.Items.Count + 1).ToString("0000"), 0);
+                    row = lv_content.Items.Add(item.DataItemId, (lv_content.Items.Count + 1).ToString("0000"), 0);
+                    row.SubItems.Add("");
+                    row.SubItems.Add("");
+                    row.SubItems.Add("");
+                    row.SubItems.Add("");
+                    row.SubItems.Add("");
                     row.SubItems.Add("");
                     row.SubItems.Add("");
                     row.SubItems.Add("");
                 }
-
-                row.SubItems[1].Text = item.Name == null ? string.Empty : item.Name;
-                row.SubItems[2].Text = item.Timestamp == null ? string.Empty : item.Timestamp;
-                row.SubItems[3].Text = item.Value == null ? string.Empty : item.Value;
+                row.SubItems[col_device.DisplayIndex].Text 
+                    = item.Device == null ? String.Empty : item.Device;
+                row.SubItems[col_subtype.DisplayIndex].Text 
+                    = item.SubType == null ? String.Empty : item.SubType;
+                row.SubItems[col_category.DisplayIndex].Text 
+                    = item.Category == null ? string.Empty : item.Category;
+                row.SubItems[col_sequence.DisplayIndex].Text 
+                    = item.Sequence == null ? String.Empty : item.Sequence;
+                row.SubItems[col_dataitemid.DisplayIndex].Text 
+                    = item.DataItemId == null ? String.Empty : item.DataItemId;
+                row.SubItems[col_name.DisplayIndex].Text 
+                    = item.Name == null ? string.Empty : item.Name;
+                row.SubItems[col_timestamp.DisplayIndex].Text 
+                    = item.Timestamp == null ? string.Empty : item.Timestamp;
+                row.SubItems[col_value.DisplayIndex].Text 
+                    = item.Value == null ? string.Empty : item.Value;
             }
+        }
+
+        /// <summary>
+        /// 清理列表
+        /// </summary>
+        private void clrLv() {
+            lv_content.Items.Clear();
         }
 
         private class Poco
         {
+            public String Device { set; get; }
             public String Name { set; get; }
             public String Timestamp { set; get; }
             public String Value { set; get; }
+            public String Sequence { set; get; }
+            public String SubType { set; get; }
+            public String Category { set; get; }
+            public String DataItemId { set; get; }
         }
 
 
