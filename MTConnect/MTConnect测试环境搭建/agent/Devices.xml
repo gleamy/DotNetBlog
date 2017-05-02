@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<MTConnectDevices xmlns:mt='urn:mtconnect.org:MTConnectDevices:1.3' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns='urn:mtconnect.org:MTConnectDevices:1.3' xsi:schemaLocation='urn:mtconnect.org:MTConnectDevices:1.3 ./schemas/MTConnectDevices_1.3.xsd'>
+  <Header creationTime='2013-04-02T03:40:04Z' assetBufferSize='1024' sender='localhost' assetCount='0' version='1.2' instanceId='1' bufferSize='131072'/>
+  <Devices>
+    <Device name='MC2_LAB_1' uuid='MC2_LAB_1' id='1'>
+      <Description model='LAB' manufacturer='MTC'>MTConnect Lab Machine - Machine</Description>
+      <DataItems>
+        <DataItem type='AVAILABILITY' id='2' category='EVENT' name='avail'/>
+        <DataItem type='EMERGENCY_STOP' category='EVENT' id='3' name='estop'/>
+        <DataItem id="4" name="func" type="FUNCTIONAL_MODE" category="EVENT" />
+      </DataItems>
+      <Components>
+        <Axes name='axes' id='5'>
+          <Components>
+            <Linear name='X' id='6'>
+              <DataItems>
+                <DataItem type='LOAD' category='SAMPLE' id='7' name='xLoad' units='PERCENT' nativeUnits='PERCENT'/>
+                <DataItem type='POSITION' category='SAMPLE' id='8' name='xPosition' subType='ACTUAL' units='MILLIMETER' nativeUnits='INCH' coordinateSystem='MACHINE'/>
+                <DataItem type='POSITION' category='CONDITION' id='9' name='travel'/>
+                <DataItem type='LOAD' category='CONDITION' id='10' name='overload'/>
+              </DataItems>
+            </Linear>
+            <Rotary name='C' nativeName="C" id='11'>
+              <DataItems>
+                <DataItem type='LOAD' category='SAMPLE' id='12' name='sLoad' units='PERCENT' nativeUnits='PERCENT'/>
+                <DataItem type="ROTARY_VELOCITY" category="SAMPLE" id="13" name="sSpeed" units="REVOLUTION/MINUTE"/>
+              </DataItems>
+            </Rotary>
+          </Components>
+        </Axes>
+        <Controller name='controller' id='14'>
+          <DataItems>
+            <DataItem type='CONTROLLER_MODE' category='EVENT' id='15' name='mode'/>
+            <DataItem type='EXECUTION' category='EVENT' id='16' name='exec'/>
+            <DataItem type='PROGRAM' category='EVENT' id='17' name='program'/>
+            <DataItem type='MESSAGE' category='EVENT' id='18' name='message' representation="DISCRETE"/>
+            <DataItem type='SYSTEM' category='CONDITION' id='19' name='system'/>
+            <DataItem type='TEMPERATURE' category='CONDITION' id='20' name='temp'/>
+            <DataItem type="e:COMMON_VARIABLE" category="EVENT" id="21" name="cv"/>
+          </DataItems>
+        </Controller>
+                <Systems name='systems' id='22'>
+          <Components>
+            <Coolant name='coolant' id='23'>
+              <DataItems>
+                <DataItem type='FILL_LEVEL' category='CONDITION' id='24' name='cool_low'/>
+              </DataItems>
+            </Coolant>
+          </Components>
+        </Systems>
+        <Sensor name='audio' id='25'>
+          <DataItems>
+            <DataItem type='DISPLACEMENT' category='SAMPLE' id='26' name='audio' units='SOUND_LEVEL' representation='TIME_SERIES' sampleRate='8000'/>
+          </DataItems>
+        </Sensor>
+      </Components>
+    </Device>
+    <Device name='MC2_LAB_2' uuid='MC2_LAB_2' id='28'>
+      <Description model='LAB' manufacturer='MTC'>MTConnect Lab Machine - Machine</Description>
+      <DataItems>
+        <DataItem type='AVAILABILITY' category='EVENT' id='29' name='avail'/>
+        <DataItem type='EMERGENCY_STOP' category='EVENT' id='30' name='estop'/>
+        <DataItem id="31" name="func" type="FUNCTIONAL_MODE" category="EVENT" />
+      </DataItems>
+      <Components>
+        <Axes name='axes' id='32'>
+          <Components>
+            <Linear name='X' id='33'>
+              <DataItems>
+                <DataItem type='LOAD' category='SAMPLE' id='34' name='xLoad' units='PERCENT' nativeUnits='PERCENT'/>
+                <DataItem type='POSITION' category='SAMPLE' id='35' name='xPosition' subType='ACTUAL' units='MILLIMETER' nativeUnits='INCH' coordinateSystem='MACHINE'/>
+                <DataItem type='POSITION' category='CONDITION' id='36' name='travel'/>
+                <DataItem type='LOAD' category='CONDITION' id='37' name='overload'/>
+              </DataItems>
+            </Linear>
+            <Rotary name='C' nativeName="C" id='38'>
+              <DataItems>
+                <DataItem type='LOAD' category='SAMPLE' id='39' name='sLoad' units='PERCENT' nativeUnits='PERCENT'/>
+                <DataItem type="ROTARY_VELOCITY" category="SAMPLE" id="40" name="sSpeed" units="REVOLUTION/MINUTE"/>
+              </DataItems>
+            </Rotary>
+          </Components>
+        </Axes>
+        <Controller name='controller' id='41'>
+          <DataItems>
+            <DataItem type='CONTROLLER_MODE' category='EVENT' id='42' name='mode'/>
+            <DataItem type='EXECUTION' category='EVENT' id='43' name='exec'/>
+            <DataItem type='PROGRAM' category='EVENT' id='44' name='program'/>
+            <DataItem type='MESSAGE' category='EVENT' id='45' name='message' representation="DISCRETE"/>
+            <DataItem type='SYSTEM' category='CONDITION' id='46' name='system'/>
+            <DataItem type='TEMPERATURE' category='CONDITION' id='47' name='temp'/>
+            <DataItem type="e:COMMON_VARIABLE" category="EVENT" id="48" name="cv"/>
+          </DataItems>
+        </Controller>
+                <Systems name='systems' id='49'>
+          <Components>
+            <Coolant name='coolant' id='50'>
+              <DataItems>
+                <DataItem type='FILL_LEVEL' category='CONDITION' id='51' name='cool_low'/>
+              </DataItems>
+            </Coolant>
+          </Components>
+        </Systems>
+        <Sensor name='audio' id='51'>
+          <DataItems>
+            <DataItem type='DISPLACEMENT' category='SAMPLE' id='53' name='audio' units='SOUND_LEVEL' representation='TIME_SERIES' sampleRate='8000'/>
+          </DataItems>
+        </Sensor>
+      </Components>
+    </Device>
+    <Device name='MC2_LAB_3' uuid='MC2_LAB_3' id='54'>
+      <Description model='LAB' manufacturer='MTC'>MTConnect Lab Machine - Machine</Description>
+      <DataItems>
+        <DataItem type='AVAILABILITY' category='EVENT' id='55' name='avail'/>
+        <DataItem type='EMERGENCY_STOP' category='EVENT' id='56' name='estop'/>
+        <DataItem id="57" name="func" type="FUNCTIONAL_MODE" category="EVENT" />
+      </DataItems>
+      <Components>
+        <Axes name='axes' id='58'>
+          <Components>
+            <Linear name='X' id='59'>
+              <DataItems>
+                <DataItem type='LOAD' category='SAMPLE' id='60' name='xLoad' units='PERCENT' nativeUnits='PERCENT'/>
+                <DataItem type='POSITION' category='SAMPLE' id='61' name='xPosition' subType='ACTUAL' units='MILLIMETER' nativeUnits='INCH' coordinateSystem='MACHINE'/>
+                <DataItem type='POSITION' category='CONDITION' id='62' name='travel'/>
+                <DataItem type='LOAD' category='CONDITION' id='63' name='overload'/>
+              </DataItems>
+            </Linear>
+            <Rotary name='C' nativeName="C" id='64'>
+              <DataItems>
+                <DataItem type='LOAD' category='SAMPLE' id='65' name='sLoad' units='PERCENT' nativeUnits='PERCENT'/>
+                <DataItem type="ROTARY_VELOCITY" category="SAMPLE" id="66" name="sSpeed" units="REVOLUTION/MINUTE"/>
+              </DataItems>
+            </Rotary>
+          </Components>
+        </Axes>
+        <Controller name='controller' id='67'>
+          <DataItems>
+            <DataItem type='CONTROLLER_MODE' category='EVENT' id='68' name='mode'/>
+            <DataItem type='EXECUTION' category='EVENT' id='69' name='exec'/>
+            <DataItem type='PROGRAM' category='EVENT' id='70' name='program'/>
+            <DataItem type='MESSAGE' category='EVENT' id='71' name='message' representation="DISCRETE"/>
+            <DataItem type='SYSTEM' category='CONDITION' id='72' name='system'/>
+            <DataItem type='TEMPERATURE' category='CONDITION' id='73' name='temp'/>
+            <DataItem type="e:COMMON_VARIABLE" category="EVENT" id="74" name="cv"/>
+          </DataItems>
+        </Controller>
+                <Systems name='systems' id='75'>
+          <Components>
+            <Coolant name='coolant' id='76'>
+              <DataItems>
+                <DataItem type='FILL_LEVEL' category='CONDITION' id='77' name='cool_low'/>
+              </DataItems>
+            </Coolant>
+          </Components>
+        </Systems>
+        <Sensor name='audio' id='78'>
+          <DataItems>
+            <DataItem type='DISPLACEMENT' category='SAMPLE' id='79' name='audio' units='SOUND_LEVEL' representation='TIME_SERIES' sampleRate='8000'/>
+          </DataItems>
+        </Sensor>
+      </Components>
+    </Device>
+  </Devices>
+</MTConnectDevices>
